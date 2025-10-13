@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Sparkles, TrendingUp, TrendingDown, Shuffle, Target, Zap, Trophy, MapPin, Calculator, History, Copy, Navigation } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('generator');
@@ -438,6 +439,7 @@ export default function App() {
           </ul>
         </div>
       </div>
+      <Analytics />
     </div>
   );
 }
