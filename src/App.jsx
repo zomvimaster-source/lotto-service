@@ -5,6 +5,7 @@ import { getLottoNumbersWithProxy, getLatestLottoNumbers, analyzeNumberFrequency
 import WinningVerification from './components/WinningVerification';
 import { useDarkMode } from './hooks/useDarkMode';
 import { useFavorites } from './hooks/useFavorites';
+import { HeaderBanner, InContentAd, FooterBanner } from './components/AdSense';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('generator');
@@ -281,6 +282,9 @@ export default function App() {
       )}
 
       <div className="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8">
+        {/* 상단 배너 광고 */}
+        <HeaderBanner />
+        
         <div className="text-center mb-6 sm:mb-8">
           <div className="flex items-center justify-between mb-4">
             <div></div>
@@ -496,20 +500,25 @@ export default function App() {
             )}
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-              {strategies.map((strategy) => {
+              {strategies.map((strategy, index) => {
                 const Icon = strategy.icon;
                 return (
-                  <div key={strategy.id} className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-2xl shadow-lg p-4 sm:p-6 hover:shadow-2xl transition-shadow cursor-pointer active:scale-95`} onClick={() => handleGenerate(strategy)}>
-                    <div className="flex items-center gap-3 mb-3 sm:mb-4">
-                      <div className={`${strategy.color} p-2 sm:p-3 rounded-xl`}>
-                        <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                  <div key={strategy.id}>
+                    <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-2xl shadow-lg p-4 sm:p-6 hover:shadow-2xl transition-shadow cursor-pointer active:scale-95`} onClick={() => handleGenerate(strategy)}>
+                      <div className="flex items-center gap-3 mb-3 sm:mb-4">
+                        <div className={`${strategy.color} p-2 sm:p-3 rounded-xl`}>
+                          <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                        </div>
+                        <h3 className={`text-lg sm:text-xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>{strategy.name}</h3>
                       </div>
-                      <h3 className={`text-lg sm:text-xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>{strategy.name}</h3>
+                      <p className={`text-sm sm:text-base ${darkMode ? 'text-gray-300' : 'text-gray-600'} mb-3 sm:mb-4`}>{strategy.description}</p>
+                      <button className={`w-full ${strategy.color} text-white py-3 sm:py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity text-sm sm:text-base`}>
+                        번호 생성하기
+                      </button>
                     </div>
-                    <p className={`text-sm sm:text-base ${darkMode ? 'text-gray-300' : 'text-gray-600'} mb-3 sm:mb-4`}>{strategy.description}</p>
-                    <button className={`w-full ${strategy.color} text-white py-3 sm:py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity text-sm sm:text-base`}>
-                      번호 생성하기
-                    </button>
+                    
+                    {/* 3번째 전략 카드 후에 중간 광고 삽입 */}
+                    {index === 2 && <InContentAd />}
                   </div>
                 );
               })}
@@ -707,6 +716,9 @@ export default function App() {
           </div>
         </div>
 
+        {/* 하단 광고 */}
+        <FooterBanner />
+        
         <div className={`mt-8 ${darkMode ? 'bg-gray-800/90' : 'bg-white/80'} backdrop-blur rounded-2xl p-6`}>
           <h3 className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-gray-800'} mb-3`}>💡 이용 안내</h3>
           <ul className={`space-y-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'} text-sm`}>
