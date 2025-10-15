@@ -1,0 +1,104 @@
+{
+  "WFWorkflowMinimumClientVersionString": "1113",
+  "WFWorkflowMinimumClientVersion": 1113,
+  "WFWorkflowIcon": {
+    "WFWorkflowIconStartColor": 4274264319,
+    "WFWorkflowIconGlyphNumber": 61440
+  },
+  "WFWorkflowClientVersion": "2605.0.5",
+  "WFWorkflowOutputContentItemClasses": [],
+  "WFWorkflowHasOutputFallback": false,
+  "WFWorkflowActions": [
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.comment",
+      "WFWorkflowActionParameters": {
+        "WFCommentActionText": "🎰 로또 데이터 자동 업데이트 단축어\n매주 토요일 9시 5분 자동 실행\n\n⚠️ 사용 전 필수 설정:\n1. GitHub Personal Access Token 발급\n2. 아래 YOUR_GITHUB_TOKEN_HERE 교체\n\n권한: repo, workflow 필요"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.shownotification",
+      "WFWorkflowActionParameters": {
+        "WFNotificationActionTitle": "🎰 로또 업데이트",
+        "WFNotificationActionBody": "로또 데이터 업데이트를 시작합니다..."
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.downloadurl",
+      "WFWorkflowActionParameters": {
+        "WFHTTPMethod": "POST",
+        "WFHTTPHeaders": {
+          "Authorization": "token YOUR_GITHUB_TOKEN_HERE",
+          "Accept": "application/vnd.github.v3+json",
+          "Content-Type": "application/json",
+          "User-Agent": "iPhone-Shortcuts/1.0"
+        },
+        "WFHTTPBodyType": "JSON",
+        "WFJSONValues": {
+          "ref": "main",
+          "inputs": {}
+        },
+        "WFURL": "https://api.github.com/repos/zomvimaster-source/lotto-service/actions/workflows/update-lotto-data.yml/dispatches"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.conditional",
+      "WFWorkflowActionParameters": {
+        "WFCondition": 4,
+        "WFConditionalActionString": "2",
+        "WFControlFlowMode": 0
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.shownotification",
+      "WFWorkflowActionParameters": {
+        "WFNotificationActionTitle": "✅ 업데이트 완료",
+        "WFNotificationActionBody": "로또 데이터 업데이트가 시작되었습니다!\n웹사이트에 5분 후 반영됩니다.\n\n🌐 사이트: lotto-service.vercel.app"
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.conditional",
+      "WFWorkflowActionParameters": {
+        "WFControlFlowMode": 1
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.shownotification",
+      "WFWorkflowActionParameters": {
+        "WFNotificationActionTitle": "❌ 업데이트 실패",
+        "WFNotificationActionBody": "GitHub Actions 실행에 실패했습니다.\nGitHub 토큰을 확인해주세요."
+      }
+    },
+    {
+      "WFWorkflowActionIdentifier": "is.workflow.actions.conditional",
+      "WFWorkflowActionParameters": {
+        "WFControlFlowMode": 2
+      }
+    }
+  ],
+  "WFWorkflowInputContentItemClasses": [
+    "WFAppStoreAppContentItem",
+    "WFArticleContentItem",
+    "WFContactContentItem",
+    "WFDateContentItem",
+    "WFEmailAddressContentItem",
+    "WFGenericFileContentItem",
+    "WFImageContentItem",
+    "WFiTunesProductContentItem",
+    "WFLocationContentItem",
+    "WFDCMapsLinkContentItem",
+    "WFAVAssetContentItem",
+    "WFPDFContentItem",
+    "WFPhoneNumberContentItem",
+    "WFRichTextContentItem",
+    "WFSafariWebPageContentItem",
+    "WFStringContentItem",
+    "WFURLContentItem"
+  ],
+  "WFWorkflowImportQuestions": [],
+  "WFWorkflowTypes": [
+    "NCWidget",
+    "WatchKit"
+  ],
+  "WFQuickActionSurfaces": [],
+  "WFWorkflowHasShortcutInputVariables": false
+}
