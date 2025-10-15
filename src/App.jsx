@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Sparkles, TrendingUp, TrendingDown, Shuffle, Target, Zap, Trophy, MapPin, Calculator, History, Copy, Navigation, Loader2, Shield, Moon, Sun, Heart, HeartOff, Star, Bookmark } from 'lucide-react';
+import { Sparkles, TrendingUp, TrendingDown, Shuffle, Target, Zap, Trophy, MapPin, Calculator, History, Copy, Navigation, Loader2, Shield, Moon, Sun, Heart, HeartOff, Star, Bookmark, Book } from 'lucide-react';
 import { Analytics } from '@vercel/analytics/react';
 import { getLottoNumbersWithProxy, getLatestLottoNumbers, analyzeNumberFrequency } from './api/lottoApi';
 import WinningVerification from './components/WinningVerification';
+import LottoGuide from './components/LottoGuide';
 import { useDarkMode } from './hooks/useDarkMode';
 import { useFavorites } from './hooks/useFavorites';
 import { HeaderBanner, InContentAd, FooterBanner } from './components/AdSense';
@@ -307,14 +308,15 @@ export default function App() {
         </div>
 
         <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-2xl shadow-lg p-2 mb-8`}>
-          <div className="grid grid-cols-2 lg:grid-cols-6 gap-1 sm:gap-2">
+          <div className="grid grid-cols-2 lg:grid-cols-7 gap-1 sm:gap-2">
             {[
               { id: 'generator', icon: Sparkles, label: '번호 생성' },
               { id: 'verification', icon: Shield, label: '당첨 인증' },
               { id: 'favorites', icon: Bookmark, label: '즐겨찾기' },
               { id: 'history', icon: History, label: '회차별 조회' },
               { id: 'stores', icon: Trophy, label: '1등 판매점' },
-              { id: 'calculator', icon: Calculator, label: '실수령액 계산' }
+              { id: 'calculator', icon: Calculator, label: '실수령액 계산' },
+              { id: 'guide', icon: Book, label: '가이드' }
             ].map(tab => (
               <button
                 key={tab.id}
@@ -336,6 +338,10 @@ export default function App() {
 
         {activeTab === 'verification' && (
           <WinningVerification />
+        )}
+
+        {activeTab === 'guide' && (
+          <LottoGuide darkMode={darkMode} />
         )}
 
         {activeTab === 'favorites' && (
