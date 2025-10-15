@@ -17,7 +17,8 @@
       "WebSearch",
       "mcp__sequential-thinking__sequentialthinking",
       "Bash(python:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(gh workflow:*)"
     ],
     "deny": [],
     "ask": []
