@@ -1,0 +1,67 @@
+name: 주간 로또 데이터 자동 업데이트
+
+on:
+  schedule:
+    # 매주 토요일 오후 9시 (한국시간 기준, UTC+9이므로 12시로 설정)
+    - cron: '0 12 * * 6'
+  workflow_dispatch: # 수동 실행도 가능
+
+jobs:
+  update-lotto-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 저장소 체크아웃
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Python 환경 설정
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Python 의존성 설치
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests pandas openpyxl
+
+    - name: 최신 로또 번호 가져오기 및 JSON 업데이트
+      run: |
+        python scripts/update-lotto-data.py
+
+    - name: 변경사항 확인
+      id: check_changes
+      run: |
+        if git diff --quiet; then
+          echo "changes=false" >> $GITHUB_OUTPUT
+        else
+          echo "changes=true" >> $GITHUB_OUTPUT
+        fi
+
+    - name: 변경사항 커밋 및 푸시
+      if: steps.check_changes.outputs.changes == 'true'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "🤖 로또 데이터 자동 업데이트 $(date +'%Y-%m-%d %H:%M:%S')
+
+        📊 새로운 회차 데이터 추가
+        🔄 통계 데이터 자동 갱신
+        
+        🤖 Generated with GitHub Actions
+        Co-Authored-By: GitHub Action <action@github.com>"
+        git push
+
+    - name: 업데이트 완료 알림
+      if: steps.check_changes.outputs.changes == 'true'
+      run: |
+        echo "✅ 로또 데이터가 성공적으로 업데이트되었습니다!"
+        echo "📅 업데이트 시간: $(date +'%Y-%m-%d %H:%M:%S')"
+
+    - name: 변경사항 없음 알림
+      if: steps.check_changes.outputs.changes == 'false'
+      run: |
+        echo "ℹ️ 새로운 로또 데이터가 없습니다."
+        echo "📅 확인 시간: $(date +'%Y-%m-%d %H:%M:%S')"

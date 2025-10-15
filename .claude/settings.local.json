@@ -15,7 +15,9 @@
       "Bash(git branch:*)",
       "Bash(git push:*)",
       "WebSearch",
-      "mcp__sequential-thinking__sequentialthinking"
+      "mcp__sequential-thinking__sequentialthinking",
+      "Bash(python:*)",
+      "Bash(mkdir:*)"
     ],
     "deny": [],
     "ask": []
