@@ -5,6 +5,7 @@ import { getLottoNumbersWithProxy, getLatestLottoNumbers, analyzeNumberFrequency
 import WinningVerification from './components/WinningVerification';
 import LottoGuide from './components/LottoGuide';
 import NumberStatistics from './components/NumberStatistics';
+import TaxCalculator from './components/TaxCalculator';
 import { useDarkMode } from './hooks/useDarkMode';
 import { useFavorites } from './hooks/useFavorites';
 import { HeaderBanner, InContentAd, FooterBanner } from './components/AdSense';
@@ -17,8 +18,6 @@ export default function App() {
   const [latestDraw, setLatestDraw] = useState(null);
   const [selectedRound, setSelectedRound] = useState('');
   const [roundData, setRoundData] = useState(null);
-  const [taxAmount, setTaxAmount] = useState('');
-  const [actualAmount, setActualAmount] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hotNumbers, setHotNumbers] = useState([12, 21, 33, 16, 38, 6, 7, 18, 19, 13]);
   const [coldNumbers, setColdNumbers] = useState([5, 32, 20, 25, 22, 9, 40, 8, 29, 23]);
@@ -220,31 +219,6 @@ export default function App() {
     }
   }
 
-  function calculateTax() {
-    const amount = parseInt(taxAmount.replace(/,/g, ''));
-    if (isNaN(amount) || amount <= 0) return;
-
-    let tax = 0;
-    let local = 0;
-    
-    if (amount > 300000000) {
-      tax = amount * 0.33;
-      local = tax * 0.1;
-    } else if (amount > 50000000) {
-      tax = amount * 0.22;
-      local = tax * 0.1;
-    } else {
-      tax = 0;
-      local = 0;
-    }
-
-    setActualAmount({
-      original: amount,
-      tax: Math.floor(tax),
-      local: Math.floor(local),
-      final: Math.floor(amount - tax - local)
-    });
-  }
 
   function copyAddress(address) {
     navigator.clipboard.writeText(address);
@@ -316,7 +290,7 @@ export default function App() {
               { id: 'favorites', icon: Bookmark, label: '즐겨찾기' },
               { id: 'history', icon: History, label: '회차별 조회' },
               { id: 'stores', icon: Trophy, label: '1등 판매점' },
-              { id: 'calculator', icon: Calculator, label: '실수령액 계산' },
+              { id: 'calculator', icon: Calculator, label: '세금 계산기' },
               { id: 'statistics', icon: BarChart3, label: '번호 통계' },
               { id: 'guide', icon: Book, label: '가이드' }
             ].map(tab => (
@@ -662,49 +636,7 @@ export default function App() {
         )}
 
         {activeTab === 'calculator' && (
-          <div className="bg-white rounded-2xl shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">로또 실수령액 계산기</h2>
-            <div className="mb-6">
-              <label className="block text-gray-700 font-semibold mb-2">당첨 금액 입력</label>
-              <input
-                type="text"
-                placeholder="예: 2000000000"
-                value={taxAmount}
-                onChange={(e) => setTaxAmount(e.target.value.replace(/[^0-9]/g, ''))}
-                className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-purple-500 outline-none text-xl"
-              />
-              <button
-                onClick={calculateTax}
-                className="w-full mt-4 bg-purple-600 text-white py-3 rounded-xl font-semibold hover:bg-purple-700"
-              >
-                계산하기
-              </button>
-            </div>
-
-            {actualAmount && (
-              <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-6 space-y-4">
-                <div className="flex justify-between items-center pb-4 border-b-2 border-purple-200">
-                  <span className="text-gray-700 font-semibold">당첨 금액</span>
-                  <span className="text-2xl font-bold text-gray-800">{formatNumber(actualAmount.original)}원</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">소득세 (22% 또는 33%)</span>
-                  <span className="text-lg text-red-600">-{formatNumber(actualAmount.tax)}원</span>
-                </div>
-                <div className="flex justify-between items-center pb-4 border-b-2 border-purple-200">
-                  <span className="text-gray-600">지방소득세 (10%)</span>
-                  <span className="text-lg text-red-600">-{formatNumber(actualAmount.local)}원</span>
-                </div>
-                <div className="flex justify-between items-center pt-4">
-                  <span className="text-gray-800 font-bold text-xl">실수령액</span>
-                  <span className="text-3xl font-bold text-purple-600">{formatNumber(actualAmount.final)}원</span>
-                </div>
-                <p className="text-sm text-gray-500 text-center mt-4">
-                  * 5천만원 이하: 비과세 / 5천만원~3억: 22% / 3억 초과: 33%
-                </p>
-              </div>
-            )}
-          </div>
+          <TaxCalculator darkMode={darkMode} />
         )}
 
 
