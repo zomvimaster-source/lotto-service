@@ -695,26 +695,6 @@ export default function App() {
           </div>
         )}
 
-        <div className="mt-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl p-8 text-white">
-          <div className="flex items-center justify-between flex-wrap gap-6">
-            <div>
-              <h3 className="text-2xl font-bold mb-2">💌 매주 번호 문자로 받기</h3>
-              <p className="text-purple-100">원하는 전략의 번호를 매주 자동으로 받아보세요</p>
-              <p className="text-sm text-purple-200 mt-2">월 500원 (문자 발송비) • 언제든 해지 가능</p>
-            </div>
-            <button 
-              onClick={() => {
-                alert('📱 SMS 구독 서비스 준비중입니다!\n\n🔄 현재 개발 중인 기능:\n• 매주 자동 번호 추천 발송\n• 개인 맞춤 전략 선택\n• 당첨 번호 즉시 알림\n\n곧 만나보실 수 있습니다! 🎉');
-              }}
-              className="bg-white text-purple-600 px-8 py-4 rounded-xl font-bold text-lg hover:shadow-2xl transition-shadow relative"
-            >
-              <span className="mr-2">구독하기</span>
-              <span className="absolute -top-1 -right-1 bg-yellow-500 text-white text-xs px-2 py-1 rounded-full">
-                준비중
-              </span>
-            </button>
-          </div>
-        </div>
 
         {/* 하단 광고 */}
         <FooterBanner />
