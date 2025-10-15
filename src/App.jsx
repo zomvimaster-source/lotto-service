@@ -9,6 +9,7 @@ import TaxCalculator from './components/TaxCalculator';
 import { useDarkMode } from './hooks/useDarkMode';
 import { useFavorites } from './hooks/useFavorites';
 import { HeaderBanner, InContentAd, FooterBanner } from './components/AdSense';
+import lottoHistory from './data/lottoHistory.json';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('generator');
@@ -48,8 +49,8 @@ export default function App() {
       try {
         setIsLoading(true);
         
-        // 최신 회차 데이터 가져오기
-        const latestData = await getLottoNumbersWithProxy(1192); // 테스트용 고정 회차
+        // JSON 파일에서 최신 회차 데이터 가져오기
+        const latestData = lottoHistory[0]; // 첫 번째가 최신 회차
         setLatestDraw({
           round: latestData.round,
           date: latestData.date,
