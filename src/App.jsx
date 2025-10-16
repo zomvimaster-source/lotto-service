@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Sparkles, TrendingUp, TrendingDown, Shuffle, Target, Zap, Trophy, MapPin, Calculator, History, Copy, Navigation, Loader2, Shield, Moon, Sun, Heart, HeartOff, Star, Bookmark, Book, BarChart3 } from 'lucide-react';
-// import { Analytics } from '@vercel/analytics/react';
 import { getLottoNumbersWithProxy, getLatestLottoNumbers, analyzeNumberFrequency } from './api/lottoApi';
 import WinningVerification from './components/WinningVerification';
 import LottoGuide from './components/LottoGuide';
