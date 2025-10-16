@@ -275,9 +275,8 @@ export default function App() {
           </div>
         </div>
       </div>
-    </div>
-
-    <div className="max-w-6xl mx-auto">
+      
+      <div className="max-w-6xl mx-auto">
       <div className={(darkMode ? 'bg-gray-800' : 'bg-white') + ' rounded-2xl shadow-lg p-2 mb-8'}>
           <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-8 gap-1 sm:gap-2">
             {[
