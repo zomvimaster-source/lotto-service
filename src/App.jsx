@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Sparkles, TrendingUp, TrendingDown, Shuffle, Target, Zap, Trophy, MapPin, Calculator, History, Copy, Navigation, Loader2, Shield, Moon, Sun, Heart, HeartOff, Star, Bookmark, Book, BarChart3 } from 'lucide-react';
-import { Analytics } from '@vercel/analytics/react';
+// import { Analytics } from '@vercel/analytics/react';
 import { getLottoNumbersWithProxy, getLatestLottoNumbers, analyzeNumberFrequency } from './api/lottoApi';
 import WinningVerification from './components/WinningVerification';
 import LottoGuide from './components/LottoGuide';
@@ -8,7 +8,6 @@ import NumberStatistics from './components/NumberStatistics';
 import TaxCalculator from './components/TaxCalculator';
 import { useDarkMode } from './hooks/useDarkMode';
 import { useFavorites } from './hooks/useFavorites';
-// import { HeaderBanner, InContentAd, FooterBanner } from './components/AdSense';
 import lottoHistory from './data/lottoHistory.json';
 
 export default function App() {
@@ -231,11 +230,7 @@ export default function App() {
   }
 
   return (
-    <div className={`min-h-screen transition-colors ${
-      darkMode 
-        ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' 
-        : 'bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100'
-    }`}>
+    <div className={(darkMode ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' : 'bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100') + ' min-h-screen transition-colors'}>
       {latestDraw && (
         <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 px-8 shadow-lg">
           <div className="max-w-6xl mx-auto flex items-center justify-between flex-wrap gap-4">
@@ -259,8 +254,6 @@ export default function App() {
       )}
 
       <div className="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8">
-        {/* 상단 배너 광고 - 승인 후 활성화 */}
-        {/* <HeaderBanner /> */
         
         <div className="text-center mb-6 sm:mb-8">
           <div className="flex items-center justify-between mb-4">
@@ -504,9 +497,6 @@ export default function App() {
                         번호 생성하기
                       </button>
                     </div>
-                    
-                    {/* 3번째 전략 카드 후에 중간 광고 삽입 - 승인 후 활성화 */}
-                    {/* {index === 2 && <InContentAd />} */
                   </div>
                 );
               })}
@@ -642,12 +632,10 @@ export default function App() {
         )}
 
 
-        {/* 하단 광고 - 승인 후 활성화 */}
-        {/* <FooterBanner /> */
         
-        <div className={`mt-8 ${darkMode ? 'bg-gray-800/90' : 'bg-white/80'} backdrop-blur rounded-2xl p-6`}>
-          <h3 className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-gray-800'} mb-3`}>💡 이용 안내</h3>
-          <ul className={`space-y-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'} text-sm`}>
+        <div className={(darkMode ? 'bg-gray-800/90' : 'bg-white/80') + ' mt-8 backdrop-blur rounded-2xl p-6'}>
+          <h3 className={(darkMode ? 'text-white' : 'text-gray-800') + ' text-lg font-bold mb-3'}>💡 이용 안내</h3>
+          <ul className={(darkMode ? 'text-gray-300' : 'text-gray-600') + ' space-y-2 text-sm'}>
             <li>• 본 서비스는 동행복권 공식 데이터를 활용합니다</li>
             <li>• 모든 번호 생성 전략의 당첨 확률은 동일합니다</li>
             <li>• 과거 데이터는 미래 결과에 영향을 주지 않습니다</li>
@@ -657,7 +645,6 @@ export default function App() {
           </ul>
         </div>
       </div>
-      <Analytics />
     </div>
   );
 }
