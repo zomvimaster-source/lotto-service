@@ -8,7 +8,7 @@ import NumberStatistics from './components/NumberStatistics';
 import TaxCalculator from './components/TaxCalculator';
 import { useDarkMode } from './hooks/useDarkMode';
 import { useFavorites } from './hooks/useFavorites';
-import { HeaderBanner, InContentAd, FooterBanner } from './components/AdSense';
+// import { HeaderBanner, InContentAd, FooterBanner } from './components/AdSense';
 import lottoHistory from './data/lottoHistory.json';
 
 export default function App() {
@@ -259,8 +259,8 @@ export default function App() {
       )}
 
       <div className="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8">
-        {/* 상단 배너 광고 */}
-        <HeaderBanner />
+        {/* 상단 배너 광고 - 승인 후 활성화 */}
+        {/* <HeaderBanner /> */
         
         <div className="text-center mb-6 sm:mb-8">
           <div className="flex items-center justify-between mb-4">
@@ -504,8 +504,8 @@ export default function App() {
                       </button>
                     </div>
                     
-                    {/* 3번째 전략 카드 후에 중간 광고 삽입 */}
-                    {index === 2 && <InContentAd />}
+                    {/* 3번째 전략 카드 후에 중간 광고 삽입 - 승인 후 활성화 */}
+                    {/* {index === 2 && <InContentAd />} */
                   </div>
                 );
               })}
@@ -641,8 +641,8 @@ export default function App() {
         )}
 
 
-        {/* 하단 광고 */}
-        <FooterBanner />
+        {/* 하단 광고 - 승인 후 활성화 */}
+        {/* <FooterBanner /> */
         
         <div className={`mt-8 ${darkMode ? 'bg-gray-800/90' : 'bg-white/80'} backdrop-blur rounded-2xl p-6`}>
           <h3 className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-gray-800'} mb-3`}>💡 이용 안내</h3>
