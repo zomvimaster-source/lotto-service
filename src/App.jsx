@@ -282,8 +282,9 @@ export default function App() {
             </button>
           </div>
         </div>
+      </div>
 
-        <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-2xl shadow-lg p-2 mb-8`}>
+      <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-2xl shadow-lg p-2 mb-8`}>
           <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-8 gap-1 sm:gap-2">
             {[
               { id: 'generator', icon: Sparkles, label: '번호 생성' },
