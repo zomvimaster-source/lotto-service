@@ -269,13 +269,13 @@ export default function App() {
                   ? 'bg-gray-700 text-yellow-400 hover:bg-gray-600' 
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
               }`}
-              title={darkMode ? '라이트 모드' : '다크 모드'}
-            >
+              title={darkMode ? '라이트 모드' : '다크 모드'}>
               {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
           </div>
         </div>
       </div>
+    </div>
 
       <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-2xl shadow-lg p-2 mb-8`}>
           <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-8 gap-1 sm:gap-2">
